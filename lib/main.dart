@@ -1,53 +1,98 @@
+import 'package:dine/registerRestaurant.dart';
 import 'package:flutter/material.dart';
+
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   //@override
-  var index = 0;
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-  int indexMethod(){
-    if(index == 0){
-      index = 1;
-      return 1;
-    }
-    index = 0;
-    return 0;
+class _MyAppState extends State<MyApp> {
+  var _index = 0;
+
+  void indexMethod() {
+    setState(() {
+      if (_index == 0) {
+        _index = 1;
+      } else {
+        _index = 0;
+      }
+    });
   }
 
   Widget build(BuildContext context) {
     var title = ["Admin's screen", "Admin's changed screen"];
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Dine Easy"),
-        ),
-        body: Column(
+        backgroundColor: Colors.grey,
+
+        body:
+        Column(
+
           children: <Widget>[
-            Text(title[index]),
-            RaisedButton(
-              child: Text("Add a restaurant"),
-              onPressed: () {
-                print("Chose to add a restaurant");
-                indexMethod();
-                print(index);
-              },
+            Container(
+
+              width: double.infinity,
+              padding: EdgeInsets.all(50),
+              margin: EdgeInsets.all(10),
+
+              child: Text(
+                "Dine Easy",
+                style: TextStyle(
+                    fontSize: 50,
+                  color: Colors.cyanAccent,
+                  fontFamily: "Times New Roman"
+                ),
+                textAlign: TextAlign.center,
+
+              ),
+
             ),
-            RaisedButton(
-              child: Text("Remove a restaurant"),
-              onPressed: () {
-                print("Chose to remove a restaurant");
-              },
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(100),
+              child: Text(
+                  "Register your \n restaurant",
+                style: TextStyle(
+                  color: Colors.cyanAccent,
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold
+
+                ),
+              ),
             ),
-            RaisedButton(
-              child: Text("View the pending restaurants"),
-              onPressed: () {
-                print("Chosen to view the pending restaurants");
-              },
-            ),
+            Button(),
+
+
+
+
+
+
           ],
         ),
       ),
     );
   }
+
 }
+
+class Button extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+        color: Colors.cyanAccent,
+        splashColor: Colors.white,
+        child: Text("Next"),
+        onPressed: (){
+          print("Clicked");
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+            return homeScreen();
+          }),);
+        });
+  }
+}
+
